@@ -2,6 +2,7 @@
 
 サッカー日本代表のワールドカップにまつわる12の出来事を、MapLibre GL JS による3Dマップ上で自動的に巡るストーリーテリングマップです。
 
+## 公開URL
 https://furuhashilab.github.io/Design1/
 
 ## 構成
@@ -28,25 +29,16 @@ https://furuhashilab.github.io/Design1/
 - **シーン数**: 12シーン（1993年ドーハ〜2022年カタール）
 - **ライブラリ**: MapLibre GL JS（CDN経由、ビルド不要の静的サイト）
 
-## GitHub Pagesでの公開方法
-
-1. このフォルダの内容をリポジトリのルート（または `/docs` フォルダ）にコミット＆プッシュします。
-2. GitHubリポジトリの **Settings → Pages** を開きます。
-3. **Source** を `Deploy from a branch` に設定し、対象ブランチとフォルダ（`/` または `/docs`）を選択して **Save** します。
-4. 数分後に `https://<ユーザー名>.github.io/<リポジトリ名>/` でページが公開されます。
-
-追加のビルド処理は不要です。すべて静的なHTML/CSS/JSファイルです。
-
-## ローカルでの確認
-
-ブラウザのセキュリティ制限により、`file://` で直接開くとタイルの取得などが正しく動作しない場合があります。簡易サーバーを立てて確認してください。
-
-```bash
-python3 -m http.server 8000
-# その後 http://localhost:8000 をブラウザで開く
-```
-
 ## カスタマイズ
 
 - シーンの内容や座標は `story-data.js` の `STORY` 配列を編集してください。
 - 各シーンの滞在時間やカメラの移動時間は `main.js` 先頭の `DWELL_MS` / `FLY_MS` / `ORBIT_DEG` で調整できます。
+
+## 帰属・ライセンス
+
+地図上の帰属表示を削除しないでください。
+
+- 地図ライブラリ: [MapLibre GL JS](https://maplibre.org/)（BSD-3-Clause License）
+- 地図スタイル・タイル: [OpenFreeMap](https://openfreemap.org/)
+- ベクタータイル: © [OpenMapTiles](https://openmaptiles.org/)（ODbL License）
+- 地図データ: © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors（ODbL License）
