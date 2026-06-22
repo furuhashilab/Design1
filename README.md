@@ -2,6 +2,8 @@
 
 サッカー日本代表のワールドカップにまつわる12の出来事を、MapLibre GL JS による3Dマップ上で自動的に巡るストーリーテリングマップです。
 
+https://furuhashilab.github.io/Design1/
+
 ## 構成
 
 - `index.html` — エントリーポイント
