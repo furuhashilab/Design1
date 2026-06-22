@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>日本代表 ワールドカップ・ストーリーテリングマップ</title>
+<meta name="description" content="サッカー日本代表のワールドカップにまつわる12の物語を、3Dマップ上の自動カメラワークで辿るストーリーテリングマップ" />
+
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="map"></div>
+<div id="vignette"></div>
+
+<!-- タイトル幕 -->
+<div id="title-screen">
+  <div class="eyebrow">FOOTBALL JAPAN &mdash; WORLD CUP STORYTELLING MAP</div>
+  <h1 class="title-jp"><span class="accent">―</span> 日本代表ワールドカップ物語</h1>
+  <p class="title-sub">1993年ドーハから2022年カタールまで。歓喜と悲劇が交差した12の舞台を、<br>「前へ／次へ」ボタンで自由に、または自動再生で巡る3Dマップ・ストーリーです。</p>
+  <button id="start-btn">物語を始める</button>
+</div>
+
+<!-- 上部HUD -->
+<div id="hud-top">
+  <div class="mark">JAPAN <span class="accent">WORLD CUP</span> STORY</div>
+  <div class="counter" id="hud-counter">00 / 12</div>
+</div>
+
+<!-- 右側 年表レール -->
+<div id="rail"></div>
+
+<!-- ストーリーカード -->
+<div id="story-card">
+  <div class="card-num"><span class="line"></span><span id="card-num-text">01</span></div>
+  <div class="card-year" id="card-year">1993年</div>
+  <div class="card-place" id="card-place">ドーハ <span class="country">カタール</span></div>
+  <div class="card-match" id="card-match">日本 2 - 2 イラク</div>
+  <div class="card-date" id="card-date">1993年10月28日</div>
+  <h2 class="card-title" id="card-title">悲劇の原点</h2>
+  <p class="card-body" id="card-body"></p>
+</div>
+
+<!-- 手動ナビゲーション -->
+<div id="nav-controls">
+  <button id="prev-btn" class="nav-btn" aria-label="前のシーン">&#8592; 前へ</button>
+  <button id="play-btn" class="nav-btn" aria-label="自動再生">&#9654; 自動再生</button>
+  <button id="next-btn" class="nav-btn" aria-label="次のシーン">次へ &#8594;</button>
+</div>
+
+<!-- 進行バー -->
+<div id="progress-track"><div id="progress-fill"></div></div>
+
+<!-- リプレイボタン -->
+<button id="replay-btn">もう一度見る</button>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="story-data.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

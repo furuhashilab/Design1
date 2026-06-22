@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+
+:root{
+  --navy-deep: #060912;
+  --navy: #0b1422;
+  --red: #bc002d;
+  --gold: #cfa863;
+  --ivory: #f3efe6;
+  --mist: rgba(243,239,230,0.62);
+}
+
+*{ box-sizing: border-box; }
+
+html, body{
+  margin:0; padding:0; width:100%; height:100%;
+  background: var(--navy-deep);
+  font-family: 'Noto Sans JP', sans-serif;
+  color: var(--ivory);
+  overflow: hidden;
+}
+
+#map{
+  position:absolute; inset:0; width:100%; height:100%;
+}
+
+#vignette{
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 60%, rgba(6,9,18,0) 35%, rgba(6,9,18,0.55) 100%),
+    linear-gradient(180deg, rgba(6,9,18,0.55) 0%, rgba(6,9,18,0.05) 22%, rgba(6,9,18,0.05) 70%, rgba(6,9,18,0.75) 100%);
+  z-index: 5;
+}
+
+#title-screen{
+  position:absolute; inset:0; z-index:50;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background: radial-gradient(circle at 50% 40%, #0e1830 0%, #060912 75%);
+  text-align:center;
+  transition: opacity 1.1s ease;
+}
+#title-screen.hidden{ opacity:0; pointer-events:none; }
+
+.eyebrow{
+  font-size:12px; letter-spacing:0.35em; color: var(--gold);
+  text-transform:uppercase; margin-bottom:18px; font-weight:500;
+}
+.title-jp{
+  font-family:'Shippori Mincho', serif; font-weight:700;
+  font-size: clamp(34px, 6vw, 64px);
+  line-height:1.35; margin:0 0 10px;
+  letter-spacing:0.04em;
+}
+.title-jp .accent{ color: var(--red); }
+
+/* テキスト選択時に目立つ既定の青いハイライトが出ないようにする */
+.title-jp::selection,
+.title-jp *::selection{
+  background: rgba(207,168,99,0.35);
+  color: var(--ivory);
+}
+.title-sub{
+  font-size:14px; color: var(--mist); letter-spacing:0.08em; margin-bottom:46px;
+  max-width:520px; line-height:1.9;
+}
+#start-btn{
+  font-family:'Shippori Mincho', serif;
+  background:transparent; color:var(--ivory);
+  border:1px solid var(--gold); padding:14px 46px;
+  font-size:15px; letter-spacing:0.25em; cursor:pointer;
+  border-radius:2px; transition: all .35s ease;
+}
+#start-btn:hover{ background:var(--gold); color:#060912; }
+
+#rail{
+  position:absolute; top:0; right:28px; bottom:0; z-index:20;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:0; pointer-events:none;
+}
+.rail-dot-wrap{
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  height: 42px; justify-content:center; position:relative;
+  background:none; border:none; padding:0; pointer-events:auto; cursor:pointer;
+}
+.rail-line{ width:1px; height:18px; background: rgba(243,239,230,0.18); }
+.rail-dot{
+  width:6px; height:6px; border-radius:50%;
+  background: rgba(243,239,230,0.28);
+  transition: all .5s ease;
+}
+.rail-year{
+  font-size:10px; color: rgba(243,239,230,0.35); letter-spacing:0.05em;
+  font-variant-numeric: tabular-nums; transition: all .5s ease;
+  writing-mode: vertical-rl;
+}
+.rail-dot-wrap.active .rail-dot{
+  background: var(--red); width:9px; height:9px;
+  box-shadow: 0 0 10px rgba(188,0,45,0.9);
+}
+.rail-dot-wrap.active .rail-year{ color: var(--gold); font-weight:700; }
+.rail-dot-wrap.passed .rail-dot{ background: var(--gold); }
+
+#hud-top{
+  position:absolute; top:26px; left:32px; z-index:20;
+  display:flex; align-items:baseline; gap:12px;
+}
+#hud-top .mark{ font-family:'Shippori Mincho',serif; font-weight:700; font-size:15px; letter-spacing:.18em; color: var(--ivory); }
+#hud-top .mark .accent{ color:var(--red); }
+#hud-top .counter{ font-size:11px; color: var(--mist); letter-spacing:.1em; font-variant-numeric: tabular-nums; }
+
+#story-card{
+  position:absolute; left:32px; bottom:118px; z-index:20;
+  max-width: 460px;
+  background: rgba(0,0,0,0.5);
+  padding: 22px 26px;
+  border-radius: 4px;
+  backdrop-filter: blur(2px);
+  opacity:0; transform: translateY(14px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+#story-card.show{ opacity:1; transform: translateY(0); }
+
+.card-num{
+  font-family:'Shippori Mincho',serif; font-size:13px; color: var(--gold);
+  letter-spacing:.2em; margin-bottom:10px; display:flex; align-items:center; gap:10px;
+}
+.card-num .line{ width:34px; height:1px; background: var(--gold); display:inline-block; }
+
+.card-year{ font-size:13px; color: var(--mist); letter-spacing:.15em; margin-bottom:6px; }
+.card-place{ font-size:13px; color: var(--ivory); letter-spacing:.1em; margin-bottom:10px; }
+.card-place .country{ color: var(--mist); font-size:11px; margin-left:6px; }
+
+.card-match{
+  font-family:'Shippori Mincho', serif; font-size:18px; font-weight:700;
+  color: var(--ivory); letter-spacing:.05em; margin-bottom:4px;
+}
+.card-date{ font-size:11px; color: var(--mist); letter-spacing:.1em; margin-bottom:16px; }
+
+.card-title{
+  font-family:'Shippori Mincho', serif; font-weight:700;
+  font-size: clamp(24px, 3vw, 32px);
+  color: var(--ivory); line-height:1.3; margin:0 0 14px;
+  border-left: 3px solid var(--red); padding-left:16px;
+}
+.card-body{
+  font-size:13.5px; line-height:2; color: var(--mist);
+  border-left: 3px solid transparent; padding-left:16px;
+  max-width: 420px;
+}
+
+/* ===== 手動ナビゲーション ===== */
+#nav-controls{
+  position:absolute; left:32px; bottom:78px; z-index:25;
+  display:flex; gap:10px;
+}
+.nav-btn{
+  font-family:'Noto Sans JP', sans-serif;
+  background: rgba(11,20,34,0.6);
+  border:1px solid rgba(207,168,99,0.45);
+  color: var(--ivory);
+  font-size:12px; letter-spacing:.08em;
+  padding:9px 16px; cursor:pointer; border-radius:2px;
+  transition: all .25s ease;
+  backdrop-filter: blur(4px);
+}
+.nav-btn:hover:not(:disabled){ background: var(--gold); color:#060912; border-color:var(--gold); }
+.nav-btn:disabled{ opacity:0.3; cursor:not-allowed; }
+#play-btn{ border-color: rgba(188,0,45,0.6); }
+#play-btn:hover{ background: var(--red); color:var(--ivory); border-color:var(--red); }
+
+#progress-track{
+  position:absolute; left:32px; right:32px; bottom:60px; z-index:20;
+  height:2px; background: rgba(243,239,230,0.12);
+}
+#progress-fill{
+  height:100%; width:0%; background: linear-gradient(90deg, var(--red), var(--gold));
+  transition: width .25s linear;
+}
+
+#replay-btn{
+  position:absolute; right:32px; bottom:78px; z-index:30;
+  font-family:'Shippori Mincho', serif;
+  background:transparent; border:1px solid var(--gold); color:var(--ivory);
+  padding:10px 24px; font-size:13px; letter-spacing:.2em; cursor:pointer;
+  opacity:0; pointer-events:none; transition: opacity .6s ease;
+}
+#replay-btn.show{ opacity:1; pointer-events:auto; }
+#replay-btn:hover{ background:var(--gold); color:#060912; }
+
+.maplibregl-popup{ z-index:15; }
+.maplibregl-popup-content{
+  background: rgba(11,20,34,0.92) !important;
+  color: var(--ivory) !important;
+  border: 1px solid rgba(207,168,99,0.4);
+  border-radius:2px;
+  font-family:'Noto Sans JP', sans-serif;
+  font-size:12px;
+  padding:10px 14px !important;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  letter-spacing:.03em;
+}
+.maplibregl-popup-tip{ display:none; }
+.popup-year{ color:var(--gold); font-weight:700; margin-right:6px; }
+
+@media (max-width: 720px){
+  #story-card{ left:18px; right:18px; max-width:none; bottom:130px; }
+  #nav-controls{ left:18px; right:18px; bottom:78px; justify-content:space-between; }
+  #progress-track{ left:18px; right:18px; bottom:60px; }
+  #rail{ display:none; }
+  .card-title{ font-size:22px; }
+}
